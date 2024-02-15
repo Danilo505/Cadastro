@@ -59,28 +59,6 @@ namespace Cadastro
             }
         }
 
-        private void btnMostrarErros_Click(object sender, EventArgs e)
-        {
-            StringBuilder sb = new StringBuilder();
-            foreach (Erro erro in erros)
-            {
-                sb.AppendLine($"[{erro.Horario}] {erro.Mensagem}");
-            }
-            MessageBox.Show(sb.ToString(), "Error Log", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-        public class Erro
-        {
-            public string Mensagem { get; set; }
-            public DateTime Horario { get; set; }
-
-            public Erro(string mensagem, DateTime horario)
-            {
-                Mensagem = mensagem;
-                Horario = horario;
-            }
-        }
-
         private bool IsValidEmail(string email)
         {
             try
@@ -167,6 +145,16 @@ namespace Cadastro
             subjectObservado.NotificarObservadores("Cancellation operation carried out.");
         }
 
+        private void btnMostrarErros_Click(object sender, EventArgs e)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (Erro erro in erros)
+            {
+                sb.AppendLine($"[{erro.Horario}] {erro.Mensagem}");
+            }
+            MessageBox.Show(sb.ToString(), "Error Log", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
         private void ContagemUser()
         {
             lblContagemUsuarios.Text = $"Total users: {contatos.Count}";
@@ -186,4 +174,16 @@ namespace Cadastro
             Surname = surname;
             Email = email;
         }
+}
+
+public class Erro
+{
+    public string Mensagem { get; set; }
+    public DateTime Horario { get; set; }
+
+    public Erro(string mensagem, DateTime horario)
+    {
+        Mensagem = mensagem;
+        Horario = horario;
+    }
 }
