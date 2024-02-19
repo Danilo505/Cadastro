@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Cadastro
 {
     public partial class Form1 : Form
     {
-        private List<Contato> contatos = new List<Contato> ();
-        private SubjectObservado subjectObservado = new SubjectObservado ();
+        private List<Contato> contatos = new List<Contato>();
+        private SubjectObservado subjectObservado = new SubjectObservado();
         private Stack<Erro> erros = new Stack<Erro>();
 
         public Form1()
@@ -45,18 +46,32 @@ namespace Cadastro
                 {
                     throw new Exception("Please enter a valid email address.");
                 }
-                Contato novoContato = new Contato(Name, Surname, Email);
-                contatos.Add(novoContato);
+                LogMessage($"Starting to add contact: {Name}, {Surname}, {Email}");
 
-                AtualizarListView();
-                ContagemUser();
-                subjectObservado.NotificarObservadores("New user added: " + Email);
+                Thread thread = new Thread(() =>
+                {
+                    Contato novoContato = new Contato(Name, Surname, Email);
+                    contatos.Add(novoContato);
+
+                    // Atualiza a interface do usuário na thread de UI principal
+                    BeginInvoke((Action)AtualizarListView);
+                    BeginInvoke((Action)ContagemUser);
+                    subjectObservado.NotificarObservadores("New user added: " + Email);
+
+                    LogMessage($"Contact added successfully: {Name}, {Surname}, {Email}");
+                });         
+                thread.Start();
             }
             catch (Exception ex)
             {
+                LogMessage($"Error adding contact: {ex.Message}");
                 erros.Push(new Erro(ex.Message, DateTime.Now));
                 subjectObservado.NotificarObservadores("Error: " + ex.Message);
             }
+        }
+        private void LogMessage(string message)
+        {
+            Console.WriteLine(message);       
         }
 
         private bool IsValidEmail(string email)
@@ -74,14 +89,14 @@ namespace Cadastro
 
         public void AdicionarObservador(IObservador observador)
         {
-           subjectObservado.AdicionarObservador (observador);
+            subjectObservado.AdicionarObservador(observador);
         }
 
         private void IniciarView()
         {
             listViewContatos.View = View.Details;
             listViewContatos.Columns.Add("Name:", 100, HorizontalAlignment.Center);
-            listViewContatos.Columns.Add("Surname:",150, HorizontalAlignment.Left);
+            listViewContatos.Columns.Add("Surname:", 150, HorizontalAlignment.Left);
             listViewContatos.Columns.Add("Email:", 200, HorizontalAlignment.Left);
 
             listViewContatos.View = View.Details;
@@ -94,7 +109,7 @@ namespace Cadastro
         {
             listViewContatos.Items.Clear();
             string filtroEmail = textProcurar.Text.ToLower();
-   
+
             foreach (Contato contato in contatos)
             {
                 ListViewItem item = new ListViewItem(new[] { contato.Name, contato.Surname, contato.Email });
@@ -140,7 +155,7 @@ namespace Cadastro
         }
 
         private void bntCalcel_Click(object sender, EventArgs e)
-        {      
+        {
             AtualizarListView();
             subjectObservado.NotificarObservadores("Cancellation operation carried out.");
         }
@@ -160,20 +175,20 @@ namespace Cadastro
             lblContagemUsuarios.Text = $"Total users: {contatos.Count}";
         }
     }
- }
+}
 
-    public class Contato
+public class Contato
+{
+    public string Name { get; set; }
+    public string Surname { get; set; }
+    public string Email { get; set; }
+
+    public Contato(string name, string surname, string email)
     {
-        public string Name { get; set; }
-        public string Surname { get; set;}
-        public string Email { get; set;}
-
-        public Contato(string name, string surname, string email)
-        {
-            Name = name;
-            Surname = surname;
-            Email = email;
-        }
+        Name = name;
+        Surname = surname;
+        Email = email;
+    }
 }
 
 public class Erro

@@ -65,7 +65,7 @@ namespace Cadastro
             this.btnSend.Margin = new System.Windows.Forms.Padding(4);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(97, 34);
-            this.btnSend.TabIndex = 1;
+            this.btnSend.TabIndex = 3;
             this.btnSend.Text = "Send";
             this.btnSend.UseVisualStyleBackColor = true;
             this.btnSend.Click += new System.EventHandler(this.btnSend_Click_1);
@@ -75,7 +75,7 @@ namespace Cadastro
             this.textName.Location = new System.Drawing.Point(16, 25);
             this.textName.Name = "textName";
             this.textName.Size = new System.Drawing.Size(172, 22);
-            this.textName.TabIndex = 2;
+            this.textName.TabIndex = 0;
             // 
             // label2
             // 
@@ -93,7 +93,7 @@ namespace Cadastro
             this.textSurname.Location = new System.Drawing.Point(207, 25);
             this.textSurname.Name = "textSurname";
             this.textSurname.Size = new System.Drawing.Size(254, 22);
-            this.textSurname.TabIndex = 2;
+            this.textSurname.TabIndex = 1;
             // 
             // label3
             // 
@@ -120,7 +120,7 @@ namespace Cadastro
             this.textProcurar.Location = new System.Drawing.Point(113, 167);
             this.textProcurar.Name = "textProcurar";
             this.textProcurar.Size = new System.Drawing.Size(254, 22);
-            this.textProcurar.TabIndex = 2;
+            this.textProcurar.TabIndex = 4;
             // 
             // btnBuscar
             // 
@@ -128,7 +128,7 @@ namespace Cadastro
             this.btnBuscar.Margin = new System.Windows.Forms.Padding(4);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(90, 36);
-            this.btnBuscar.TabIndex = 1;
+            this.btnBuscar.TabIndex = 5;
             this.btnBuscar.Text = "Search";
             this.btnBuscar.UseVisualStyleBackColor = true;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
@@ -159,7 +159,7 @@ namespace Cadastro
             this.btncCrescente.Location = new System.Drawing.Point(16, 460);
             this.btncCrescente.Name = "btncCrescente";
             this.btncCrescente.Size = new System.Drawing.Size(102, 30);
-            this.btncCrescente.TabIndex = 5;
+            this.btncCrescente.TabIndex = 7;
             this.btncCrescente.Text = "Increasing";
             this.btncCrescente.UseVisualStyleBackColor = true;
             this.btncCrescente.Click += new System.EventHandler(this.btncCrescente_Click);
@@ -169,7 +169,7 @@ namespace Cadastro
             this.btnDecrecente.Location = new System.Drawing.Point(134, 460);
             this.btnDecrecente.Name = "btnDecrecente";
             this.btnDecrecente.Size = new System.Drawing.Size(102, 30);
-            this.btnDecrecente.TabIndex = 5;
+            this.btnDecrecente.TabIndex = 8;
             this.btnDecrecente.Text = "Decreaing";
             this.btnDecrecente.UseVisualStyleBackColor = true;
             this.btnDecrecente.Click += new System.EventHandler(this.btnDecrecente_Click);
@@ -203,7 +203,7 @@ namespace Cadastro
             this.btnMostrarErros.Location = new System.Drawing.Point(765, 460);
             this.btnMostrarErros.Name = "btnMostrarErros";
             this.btnMostrarErros.Size = new System.Drawing.Size(156, 35);
-            this.btnMostrarErros.TabIndex = 10;
+            this.btnMostrarErros.TabIndex = 9;
             this.btnMostrarErros.Text = "ErrorMessages";
             this.btnMostrarErros.UseVisualStyleBackColor = false;
             this.btnMostrarErros.Click += new System.EventHandler(this.btnMostrarErros_Click);
